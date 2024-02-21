@@ -5,6 +5,7 @@ import NumberContainer from '../components/game/NumberContainer';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import Card from '../components/ui/Card';
 import InstructionText from '../components/ui/InstructionText';
+import { Ionicons } from '@expo/vector-icons';
 
 function generateRandomBetween(min, max, exclude) {
     const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -54,15 +55,19 @@ function GameScreen({ userNumber, onGameOver }) {
                 {currentGuess}
             </NumberContainer>
             <Card>
-                <View>
-                    <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>+</PrimaryButton>
-                    <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>-</PrimaryButton>
+                <InstructionText style={styles.instructionText}>Higher or lower?</InstructionText>
+                <View style={styles.buttonsContainer}>
+                    <View style={styles.buttonContainer}>
+                        <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
+                            <Ionicons name="add" size={24} />
+                        </PrimaryButton>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+                            <Ionicons name="remove" size={24} />
+                        </PrimaryButton>
+                    </View>
                 </View>
-                <View>
-                    <InstructionText>Higher or lower?</InstructionText>
-                    {/* + - */}
-                </View>
-                {/* <View>LOG ROUNDS</View> */}
             </Card>
         </View>
     );
@@ -74,5 +79,15 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         padding: 24,
+    },
+    buttonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    buttonContainer: {
+        flex: 1
+    },
+    instructionText: {
+        marginBottom: 12 
     }
 });
