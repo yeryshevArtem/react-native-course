@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet, Alert, Text, FlatList } from 'react-native';
 import Title from '../components/ui/Title';
 import NumberContainer from '../components/game/NumberContainer';
 import PrimaryButton from '../components/ui/PrimaryButton';
@@ -17,18 +17,24 @@ function generateRandomBetween(min, max, exclude) {
     }
 }
 
-let minBoundary = 0;
+let minBoundary = 1;
 let maxBoundary = 100;
 
 function GameScreen({ userNumber, onGameOver }) {
     const initialGuess = generateRandomBetween(1, 100, userNumber);
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
+    const [guessRounds, setGuessRounds] = useState([currentGuess]);
 
     useEffect(() => {
         if (currentGuess === userNumber) {
             onGameOver();
         }
     }, [currentGuess, userNumber, onGameOver]);
+
+    useEffect(() => {
+        minBoundary = 1;
+        maxBoundary = 100;
+    }, []);
 
     function nextGuessHandler(direction) {
         if ((direction === 'lower' && currentGuess < userNumber) || (direction === 'greater' && currentGuess > userNumber)) {
@@ -47,6 +53,9 @@ function GameScreen({ userNumber, onGameOver }) {
         }
         const newRndNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess);
         setCurrentGuess(newRndNumber);
+        setGuessRounds((prevGuessRounds) => {
+            return [...prevGuessRounds, newRndNumber];
+        });
     }
     return (
         <View style={styles.screen}>
@@ -69,6 +78,11 @@ function GameScreen({ userNumber, onGameOver }) {
                     </View>
                 </View>
             </Card>
+            <View>
+                {guessRounds.map((guessRound) => {
+                    return <Text key={guessRound}>{guessRound}</Text>
+                })}
+            </View>
         </View>
     );
 }
