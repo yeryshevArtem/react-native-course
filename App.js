@@ -1,7 +1,11 @@
+import { StatusBar } from 'expo-status-bar';
 import CategoriesScreen from './screens/CategoriesScreen';
 
 export default function App() {
   return (
-    <CategoriesScreen />
+    <>
+      <StatusBar style="light" />
+      <CategoriesScreen />
+    </>
   );
 }
