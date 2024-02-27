@@ -12,9 +12,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'white',
         textAlign: 'center',
-        borderWidth: 2,
+        // borderWidth: Platform.OS === 'android' ? 2 : 0,
+        // borderWidth: Platform.select({ ios: 0, android: 2}),
         padding: 12,
-        borderColor: 'white',
+        // borderColor: 'white',
         maxWidth: '80%',
         width: 300
     }
