@@ -1,9 +1,10 @@
 import { View, Pressable, Text, StyleSheet, Platform } from 'react-native';
 
-function CategoryGridTile({ title, color }) {
+function CategoryGridTile({ title, color, onPress }) {
     return (
         <View style={styles.gridItem}>
             <Pressable 
+                onPress={onPress}
                 style={
                     ({ pressed }) => [
                         styles.button, pressed ? styles.buttonPressed : null
