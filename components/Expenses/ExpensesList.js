@@ -4,6 +4,7 @@ import ExpenseItem from './ExpenseItem';
 function renderExpenseesItem(itemData) {
     return (
         <ExpenseItem 
+            id={itemData.item.id}
             amount={itemData.item.amount}
             date={itemData.item.date}
             description={itemData.item.description}
