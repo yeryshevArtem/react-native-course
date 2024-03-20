@@ -17,7 +17,7 @@ const DUMMY_EXPENSES = [
         id: 'e3',
         description: 'Some bananas',
         amount: 5.99,
-        date: new Date('2024-03-20')
+        date: new Date('2024-03-19')
     },
     {
         id: 'e4',
@@ -105,7 +105,7 @@ function ExpensesContextProvider({ children }) {
         });
     }
 
-    function updateExpense(expenseData) {
+    function updateExpense(id, expenseData) {
         dispatch({
             type: 'UPDATE',
             payload: {
