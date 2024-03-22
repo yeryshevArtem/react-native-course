@@ -36,9 +36,12 @@ function ManageExpense({ route, navigation }) {
         navigation.goBack();
     }
 
+    const selectedExpense = expensesCtx.expenses.find((expense) => expense.id === editedExpenseId);
+
     return (
         <View style={styles.container}>
-            <ExpenseForm 
+            <ExpenseForm
+                defaultValues={selectedExpense}
                 onSubmit={confirmHandler}
                 onCancel={cancelHandler} 
                 submitButtonLabel={isEditing ? 'Update' : 'Add'}
