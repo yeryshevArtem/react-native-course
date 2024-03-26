@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Input from './Input';
 import Button from '../UI/Button';
 import { getFormattedDate } from '../../util/date';
+import { GlobalStyles } from '../../constants/styles';
 
 function ExpenseForm({ onCancel, onSubmit, submitButtonLabel, defaultValues }) {
     const [inputs, setInputs] = useState({
@@ -80,6 +81,7 @@ function ExpenseForm({ onCancel, onSubmit, submitButtonLabel, defaultValues }) {
                         onChangeText: inputChangedHandler.bind(this, 'amount'),
                         value: inputs.amount.value
                     }}
+                    invalid={!inputs.amount.isValid}
                 />
                 <Input
                     style={styles.rowInput}
@@ -90,6 +92,7 @@ function ExpenseForm({ onCancel, onSubmit, submitButtonLabel, defaultValues }) {
                         onChangeText: inputChangedHandler.bind(this, 'date'),
                         value: inputs.date.value
                     }}
+                    invalid={!inputs.date.isValid}
                 />
             </View>
             <Input
@@ -101,9 +104,10 @@ function ExpenseForm({ onCancel, onSubmit, submitButtonLabel, defaultValues }) {
                     // autoCorrect: false
                     // autoCapitalize: 'none'
                 }}
+                invalid={!inputs.description.isValid}
             />
             {
-                formIsInvalid && <Text>Invalid input values - please check your input data.</Text>
+                formIsInvalid && <Text style={styles.errorText}>Invalid input values - please check your input data.</Text>
             }
             <View style={styles.buttons}>
                 <Button mode="flat" onPress={onCancel} style={styles.button}>Cancel</Button>
@@ -142,5 +146,10 @@ const styles = StyleSheet.create({
     button: {
         minWidth: 120,
         marginHorizontal: 8
+    },
+    errorText: {
+        textAlign: 'center',
+        color: GlobalStyles.colors.error500,
+        margin: 8
     }
 });
